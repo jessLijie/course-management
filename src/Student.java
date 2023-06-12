@@ -1,21 +1,14 @@
 import java.util.ArrayList;
 
-public class Student {
-    ArrayList <Course> courseRegistered=new ArrayList<Course>();
+public class Student extends Person{
+    ArrayList <Course> courseRegistered = new ArrayList<Course>();
     private String name;
     private String matricsNo;
 
-    public Student(){}
     public Student(String name, String matricsNo){
-        this.name = name;
+        super(name);
         this.matricsNo = matricsNo;
         
-    }
-
-    public void Student2(String name, String matricsNo){
-        this.name = name;
-        this.matricsNo = matricsNo;
-       
     }
 
     public void addCourse(Course course){
