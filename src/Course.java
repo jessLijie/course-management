@@ -20,7 +20,7 @@ public class Course {
     }
 
     public String getCourseName() {
-        return courseName;
+        return this.courseName;
     }
 
     public int getCredit() {
@@ -31,9 +31,9 @@ public class Course {
         this.currentRegistered = currentRegistered;
     }
 
-    // public void setCoordinator(String coordinator) {
-    //     this.coordinator = coordinator;
-    // }
+    public void setCoordinator(String coordinator) {
+         this.coordinator = coordinator;
+     }
 
     public String getCourseCode() {
         return courseCode;
