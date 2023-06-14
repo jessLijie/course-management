@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class App {
+    
     private static int role, action;
 
     public static void clearScreen() {

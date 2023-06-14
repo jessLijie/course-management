@@ -8,7 +8,6 @@ public class Course {
     private int currentRegistered;
     private String coordinator;
 
-
     public Course(String cc, String cn, int c, int max) {
         this.courseCode = cc;
         this.courseName = cn;
@@ -67,7 +66,6 @@ public class Course {
             System.out.println();
         }
         }
-        
     }
 
 
