@@ -12,7 +12,7 @@ public class LecturerView {
 
     public void displayStudentList(Student s)
     {
-        System.out.println("Name: " +s.getName());
+        System.out.println("Name: " + s.getName());
     }
 
 }

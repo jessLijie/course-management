@@ -111,6 +111,7 @@ public class App {
                                 clearScreen();
                                 // View student list
                                 // Choose from registered roster
+                                lController.viewStudentList(studentList);
                                 break;
                             }
                         }

@@ -39,8 +39,8 @@ public class LecturerController {
         }
     }
 
+    //view lecturer registered course
     
-
     public void viewStudentList(ArrayList<Student> studentList)
     {
         for (int i = 0; i < studentList.size(); i++)
