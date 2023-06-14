@@ -39,7 +39,22 @@ public class LecturerController {
         }
     }
 
-    //view lecturer registered course
+    public void viewRegisteredCourse(String lecturerName)
+    {
+        boolean foundRegisteredCourse = false;
+        for (int i = 0; i < courseList.size(); i++)
+        {
+            if (courseList.get(i).getCoordinator().equals(lecturerName))
+            {
+                lecturerView.displayRegisteredCourse(courseList.get(i));
+                foundRegisteredCourse = true;
+            }
+        }
+        if (foundRegisteredCourse == false)
+        {
+            System.out.println("No course registerd");
+        }
+    }
     
     public void viewStudentList(ArrayList<Student> studentList)
     {
