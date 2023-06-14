@@ -12,6 +12,7 @@ public class App {
     public static void main(String[] args) throws Exception {
         clearScreen();
         ArrayList<Course> courseList = new ArrayList<>();
+        ArrayList<Course> registeredCourseList = new ArrayList<>();
         ArrayList<Student> studentList = new ArrayList<>();
         ArrayList<Lecturer> lecturers = new ArrayList<>();
         ArrayList<Admin> admins = new ArrayList<>();
@@ -20,6 +21,11 @@ public class App {
         // LecturerController lController = new LecturerController(lecturers);
         // AdminController aController = new AdminController(admins);
 
+
+        AdminView adminView= new AdminView();
+        AdminController adminController= new AdminController(courseList);
+        StudentView studentView= new StudentView();
+        StudentController studentController= new StudentController();
 
         System.out.println("| Course Registration System |");
         Scanner s = new Scanner(System.in);
@@ -38,12 +44,20 @@ public class App {
                     switch (action) {
                         case 1: {
                             clearScreen();
+
                             // Display course
+                            adminView.displayCourseDetails(courseList);
+
                             break;
                         }
                         case 2: {
                             clearScreen();
+
                             // Add courses
+                            // adminView.addCourseView();
+                            adminController.addCourse();
+
+
                             break;
                         }
                         case 3: {
@@ -90,6 +104,8 @@ public class App {
                 case 3: {
                     clearScreen();
                     System.out.println("Howdy Student!");
+                    //verify identity
+
                     System.out.println("\n1. View Courses \n2. Register for course \n3. View Registered Courses");
                     System.out.print("Enter your action >> ");
                     action = s.nextInt();
@@ -97,17 +113,25 @@ public class App {
                     switch (action) {
                         case 1: {
                             clearScreen();
+
                             // View courses
+                            studentView.displayCourseDetails(courseList);
                             break;
                         }
                         case 2: {
                             clearScreen();
+
                             // Register for course
+                            studentController.registerCourse(courseList, registeredCourseList);
+
                             break;
                         }
                         case 3: {
                             clearScreen();
+
                             // View registered courses
+                            studentView.displayRegisteredCourse(registeredCourseList);
+
                             break;
                         }
                     }

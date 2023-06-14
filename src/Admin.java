@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Admin extends Person{
     private String name;
     private String staffID;
@@ -15,5 +17,6 @@ public class Admin extends Person{
         return staffID;
     }
     
+
     
 }
