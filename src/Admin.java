@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 
 public class Admin extends Person{
+    private ArrayList<Course> courseList;
     private String name;
     private String staffID;
 
@@ -15,6 +16,10 @@ public class Admin extends Person{
 
     public String getStaffID() {
         return staffID;
+    }
+    
+    public ArrayList<Course> getCourseList() {
+        return courseList;
     }
     
     

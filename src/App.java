@@ -1,8 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import javax.swing.text.html.HTMLDocument.BlockElement;
-
 public class App {
     private static int role, action;
 
@@ -30,6 +28,9 @@ public class App {
 
         AdminView adminView = new AdminView();
         StudentView studentView = new StudentView();
+        // LecturerController lController = new LecturerController(lecturers);
+        AdminController aController = new AdminController(courseList);//student list
+
 
         System.out.println("| Course Registration System |");
         Scanner s = new Scanner(System.in);
@@ -56,17 +57,15 @@ public class App {
                         }
                         case 2: {
                             clearScreen();
-
                             // Add courses
-                            // adminView.addCourseView();
-                            Course adminCourse = adminView.addCourseView();
-                            courseList.add(adminCourse);
+                            aController.addCourse();
 
                             break;
                         }
                         case 3: {
                             clearScreen();
                             // Remove courses
+                            aController.deleteCourse();
                             break;
                         }
                         case 4: {
