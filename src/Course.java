@@ -8,18 +8,19 @@ public class Course {
     private int currentRegistered;
     private String coordinator;
 
-    public Course(String cc, String cn, int c, int max) {
+    public Course(){};
+
+    public Course(String cc, String cn, String coordinator, int c, int max) {
         this.courseCode = cc;
         this.courseName = cn;
         this.credit = c;
         this.maxStudent = max;
+        this.coordinator = coordinator;
         this.currentRegistered = 0;
-        this.coordinator = "";
     }
 
-
     public String getCourseName() {
-        return courseName;
+        return this.courseName;
     }
 
     public int getCredit() {
@@ -31,8 +32,8 @@ public class Course {
     }
 
     public void setCoordinator(String coordinator) {
-        this.coordinator = coordinator;
-    }
+         this.coordinator = coordinator;
+     }
 
     public String getCourseCode() {
         return courseCode;
@@ -66,6 +67,7 @@ public class Course {
             System.out.println();
         }
         }
+        
     }
 
 

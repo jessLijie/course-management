@@ -1,8 +1,9 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javax.swing.text.html.HTMLDocument.BlockElement;
+
 public class App {
-    
     private static int role, action;
 
     public static void clearScreen() {
@@ -17,10 +18,18 @@ public class App {
         ArrayList<Lecturer> lecturers = new ArrayList<>();
         ArrayList<Admin> admins = new ArrayList<>();
 
-        // StudentController sController = new StudentController(studentList,courseList);
-        // LecturerController lController = new LecturerController(lecturers);
+        // StudentController sController = new
+        // StudentController(studentList,courseList);
+        LecturerController lController = new LecturerController(courseList, studentList);
         // AdminController aController = new AdminController(admins);
 
+        Lecturer lecturer1 = new Lecturer("Ali", "123");
+        Lecturer lecturer2 = new Lecturer("Abu", "456");
+        lecturers.add(lecturer1);
+        lecturers.add(lecturer2);
+
+        AdminView adminView = new AdminView();
+        StudentView studentView = new StudentView();
 
         System.out.println("| Course Registration System |");
         Scanner s = new Scanner(System.in);
@@ -39,12 +48,20 @@ public class App {
                     switch (action) {
                         case 1: {
                             clearScreen();
+
                             // Display course
+                            adminView.displayCourseDetails(courseList);
+
                             break;
                         }
                         case 2: {
                             clearScreen();
+
                             // Add courses
+                            // adminView.addCourseView();
+                            Course adminCourse = adminView.addCourseView();
+                            courseList.add(adminCourse);
+
                             break;
                         }
                         case 3: {
@@ -55,7 +72,7 @@ public class App {
                         case 4: {
                             clearScreen();
                             // View student
-                            //choose from courselist
+                            // choose from courselist
                             break;
                         }
                     }
@@ -64,27 +81,41 @@ public class App {
                 case 2: {
                     clearScreen();
                     System.out.println("Howdy Lecturer!");
-                    System.out.println("1. View course \n2. Register Roster \n3. View Student List");
-                    System.out.print("Enter your action >> ");
-                    action = s.nextInt();
-                    s.nextLine();
-                    switch (action) {
-                        case 1: {
-                            clearScreen();
-                            // View course logic
-                            break;
+                    Boolean foundLec = false;
+                    // verify identity
+                    System.out.print("Enter your name >> ");
+                    String lecturerName = s.nextLine();
+                    for (int i = 0; i < lecturers.size(); i++) {
+                        if (lecturerName.equals(lecturers.get(i).getName())) {
+                            foundLec = true;
                         }
-                        case 2: {
-                            clearScreen();
-                            // Register Roster logic
-                            break;
+                    }
+                    if (foundLec == true) {
+                        System.out.println("1. View course \n2. Register Roster \n3. View Student List");
+                        System.out.print("Enter your action >> ");
+                        action = s.nextInt();
+                        s.nextLine();
+                        switch (action) {
+                            case 1: {
+                                clearScreen();
+                                // View course logic
+                                break;
+                            }
+                            case 2: {
+                                clearScreen();
+                                // Register Roster logic
+                                lController.registerRoster(lecturerName);
+                                break;
+                            }
+                            case 3: {
+                                clearScreen();
+                                // View student list
+                                // Choose from registered roster
+                                break;
+                            }
                         }
-                        case 3: {
-                            clearScreen();
-                            // View student list
-                            // Choose from registered roster
-                            break;
-                        }
+                    } else {
+                        System.out.println("Login as Lecturer Failed");
                     }
                     break;
                 }
@@ -99,6 +130,8 @@ public class App {
                         case 1: {
                             clearScreen();
                             // View courses
+                            // studentView.disp
+
                             break;
                         }
                         case 2: {
