@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class LecturerView {
@@ -10,9 +11,16 @@ public class LecturerView {
         return code;
     }
 
-    public void displayStudentList(Student s)
+    public void displayStudentList(ArrayList<Student>enrolledStudentList)
     {
-        System.out.println("Name: " +s.getName());
-    }
+        if(enrolledStudentList.size()==0){
+            System.out.println("No students enrolled");
+        }else{
+            for (int i = 0; i < enrolledStudentList.size(); i++) {
+                Student s = enrolledStudentList.get(i);
+                System.out.println(s.getName());
+                System.out.println();
+            }
+        }      }
 
 }

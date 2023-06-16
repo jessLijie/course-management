@@ -7,6 +7,7 @@ public class Course {
     private int maxStudent;
     private int currentRegistered;
     private String coordinator;
+    
 
     public Course(){};
 

@@ -7,8 +7,11 @@ public class Student extends Person{
 
     public Student(String name, String matricsNo){
         super(name);
-        this.matricsNo = matricsNo;
-        
+        this.matricsNo = matricsNo; 
+    }
+
+    public Student(String name){
+        super(name);
     }
 
     public void addCourse(Course course){

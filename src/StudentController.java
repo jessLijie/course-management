@@ -2,26 +2,39 @@ import java.util.ArrayList;
 
 public class StudentController {
 
-    private String code;
-    Course course;
-
-    public void registerCourse(ArrayList<Course>courseList, ArrayList<Course>registeredCourseList){
+    public void registerCourse(ArrayList<Course>courseList, ArrayList<Course>registeredCourseList, ArrayList<Student>enrollStudents){
         StudentView studentView= new StudentView();
 
         // display available course list
         studentView.displayCourseDetails(courseList);
 
         //display enter course view
-        code= studentView.enterCourseView();
+        String code= studentView.enterCourseView();
 
         //find course and return the course object
-        course= findCourseByCode(code, courseList);
+        Course course= findCourseByCode(code, courseList);
 
         if(course != null){
-            // add course to student bucket
-            registeredCourseList.add(course);
+            String name= studentView.enterNameView();
+            CourseController courseController= new CourseController();
+            ArrayList<Student>enrolledStudents= courseController.getEnrolledStudents();
+
+            // check the current enrolled student before adding to the list
+            if(enrolledStudents.size()>= course.getMaxStudent()){
+                System.out.println("Course is full. Cannot register.");
+            }else{
+                // add course to student bucket
+                registeredCourseList.add(course);
+
+                // add student to course bucket
+                Student student= new Student(name);
+                enrollStudents.add(student);
+                course.setCurrentRegistered(course.getCurrentRegistered() + 1);
+                System.out.println("Course registered successfully.");
+
+            }
         }else{
-            
+            System.out.println("Invalid course code");
         }
     }
 

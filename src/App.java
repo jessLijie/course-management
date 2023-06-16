@@ -13,6 +13,7 @@ public class App {
         clearScreen();
         ArrayList<Course> courseList = new ArrayList<>();
         ArrayList<Course> registeredCourseList = new ArrayList<>();
+        ArrayList<Student> enrolledStduentList = new ArrayList<>();
         ArrayList<Student> studentList = new ArrayList<>();
         ArrayList<Lecturer> lecturers = new ArrayList<>();
         ArrayList<Admin> admins = new ArrayList<>();
@@ -29,7 +30,8 @@ public class App {
 
         AdminView adminView = new AdminView();
         StudentView studentView = new StudentView();
-        // LecturerController lController = new LecturerController(lecturers);
+        CourseView courseView= new CourseView();
+        LecturerView lectureView= new LecturerView();
         AdminController aController = new AdminController(courseList);//student list
         StudentController studentController= new StudentController();
 
@@ -73,7 +75,7 @@ public class App {
                         case 4: {
                             clearScreen();
                             // View student
-                            // choose from courselist
+                            courseView.displayStudentRegistered(enrolledStduentList);
                             break;
                         }
                     }
@@ -112,6 +114,7 @@ public class App {
                                 clearScreen();
                                 // View student list
                                 // Choose from registered roster
+                                lectureView.displayStudentList(enrolledStduentList);
                                 break;
                             }
                         }
@@ -141,7 +144,7 @@ public class App {
                             clearScreen();
 
                             // Register for course
-                            studentController.registerCourse(courseList, registeredCourseList);
+                            studentController.registerCourse(courseList, registeredCourseList, enrolledStduentList);
 
                             break;
                         }

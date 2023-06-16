@@ -34,6 +34,15 @@ public class StudentView {
         return code;      
     }
 
+    public String enterNameView(){
+        System.out.print("Enter your name: ");
+        String name= scanner.nextLine();
+
+        return name;      
+    }
+
+
+
     public void displayRegisteredCourse(ArrayList<Course>courseList){
         if(courseList.size()==0){
             System.out.println("No course is registered");

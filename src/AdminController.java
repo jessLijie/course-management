@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 public class AdminController {
     AdminView adminView;
-    ArrayList<Course>courseList;
+    private ArrayList<Course>courseList;
 
 
     public AdminController(ArrayList<Course>courseList){
@@ -29,6 +29,8 @@ public class AdminController {
            
          }
     }
+
+    
 
 
 
