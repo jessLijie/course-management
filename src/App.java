@@ -35,9 +35,10 @@ public class App {
         AdminController aController = new AdminController(courseList);//student list
         StudentController studentController= new StudentController();
 
-        System.out.println("| Course Registration System |");
+
         Scanner s = new Scanner(System.in);
         do {
+            System.out.println("| Course Registration System |");
             System.out.println("1. Admin \n2. Lecturer \n3. Student ");
             System.out.print("Enter your role >> ");
             role = s.nextInt();

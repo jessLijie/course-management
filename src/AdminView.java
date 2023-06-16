@@ -70,7 +70,20 @@ public class AdminView {
     }
     if (status==false){
         System.out.println("Course is not exist");}
-        return course;
+        return course; 
+    }
+    public void displayStudentDetails(ArrayList<Student> studentList) {
+        if (studentList.size() == 0) {
+            System.out.println("No student assign yet");
+        } else {
+            for (int i = 0; i < studentList.size(); i++) {
+                Student student = studentList.get(i);
+                System.out.println("Student [" + (i + 1) + "]");
+                System.out.println("Student: " + student.getName());
+                System.out.println("Student Name: " + student.getMatricsNo());
+                
+            }
+        }
     }
 
 

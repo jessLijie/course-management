@@ -39,15 +39,5 @@ public class LecturerController {
         }
     }
 
-    
-
-    public void viewStudentList(ArrayList<Student> studentList)
-    {
-        for (int i = 0; i < studentList.size(); i++)
-        {
-            lecturerView.displayStudentList(studentList.get(i));
-        }
-    }
-
-
+  
 }
