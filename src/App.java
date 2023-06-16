@@ -95,7 +95,7 @@ public class App {
                         }
                     }
                     if (foundLec == true) {
-                        System.out.println("1. View course \n2. Register Roster \n3. View Student List");
+                        System.out.println("1. View registered course \n2. Register Roster \n3. View Student List");
                         System.out.print("Enter your action >> ");
                         action = s.nextInt();
                         s.nextLine();
@@ -103,6 +103,7 @@ public class App {
                             case 1: {
                                 clearScreen();
                                 // View course logic
+                                lController.viewRegisteredCourse(lecturerName);
                                 break;
                             }
                             case 2: {
