@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class LecturerController {
@@ -6,63 +7,87 @@ public class LecturerController {
     ArrayList<Course> courseList;
     ArrayList<Student> studentList;
 
-    public LecturerController(ArrayList<Course> courseList, ArrayList<Student> studentList)
-    {
+    public LecturerController(ArrayList<Student> studentList, ArrayList<Course> courseList) {
         this.lecturerView = new LecturerView();
         this.lecturer = new Lecturer();
         this.courseList = courseList;
         this.studentList = studentList;
     }
 
-    public String readLecturerName()
-    {
-        return lecturer.getName();
+    public void ClearScreen() {
+        // Clears Screen in java
+        try {
+            if (System.getProperty("os.name").contains("Windows"))
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            else
+                Runtime.getRuntime();
+        } catch (IOException | InterruptedException ex) {
+        }
     }
 
-    public void registerRoster(String name)
-    {
+    public void lecturerAction(ArrayList<Lecturer> lecturers) {
+        int action;
+        do {
+            action = lecturerView.LecturerMenu(lecturers);
+            ClearScreen();
+            switch (action) {
+                case 1: {
+                    // view coordinated course
+                    viewCoordinatedCourse(lecturerView.getCurrentLecturer().getName());
+                    break;
+                }
+                case 2: {
+                    // register roster
+                    lecturerView.displayCourseDetails(courseList);
+                    if (courseList.size() != 0) {
+                        registerRoster(lecturerView.getCurrentLecturer().getName());
+                    }
+                    break;
+                }
+                case 3: {
+                    // view student of coordinated course
+                    viewCoordinatedCourse(lecturerView.getCurrentLecturer().getName());
+                    break;
+
+                }
+                default: {
+                    System.out.println("Invalid option :(");
+                    break;
+                }
+            }
+
+        } while (action > 0 && action < 4);
+    }
+
+    public void viewCoordinatedCourse(String lecturerName) {
+        boolean foundRegisteredCourse = false;
+        for (int i = 0; i < courseList.size(); i++) {
+            if (courseList.get(i).getCoordinator().equals(lecturerName)) {
+                lecturerView.displayCoordinatedCourse(courseList.get(i));
+                foundRegisteredCourse = true;
+            }
+        }
+        if (foundRegisteredCourse == false) {
+            System.out.println("No course registered");
+        }
+    }
+
+    public void registerRoster(String name) {
         int index = 0;
         boolean foundCourse = false;
         String register = lecturerView.readCourse();
         System.out.println(register);
-        for (int i = 0; i < courseList.size(); i++)
-        {
+        for (int i = 0; i < courseList.size(); i++) {
             if (courseList.get(i).getCourseCode().equals(register)) {
                 index = i;
                 foundCourse = true;
             }
         }
-        if (foundCourse==true){
+        if (foundCourse == true) {
             this.courseList.get(index).setCoordinator(name);
-        }else{
+            lecturerView.getCurrentLecturer().getCoordinatedCourse().add(this.courseList.get(index));
+        } else {
             System.out.println("Course not found");
         }
     }
-
-    public void viewRegisteredCourse(String lecturerName)
-    {
-        boolean foundRegisteredCourse = false;
-        for (int i = 0; i < courseList.size(); i++)
-        {
-            if (courseList.get(i).getCoordinator().equals(lecturerName))
-            {
-                lecturerView.displayRegisteredCourse(courseList.get(i));
-                foundRegisteredCourse = true;
-            }
-        }
-        if (foundRegisteredCourse == false)
-        {
-            System.out.println("No course registerd");
-        }
-    }
-    
-    public void viewStudentList(ArrayList<Student> studentList)
-    {
-        for (int i = 0; i < studentList.size(); i++)
-        {
-            lecturerView.displayStudentList(studentList.get(i));
-        }
-    }
-
-
 }

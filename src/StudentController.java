@@ -1,41 +1,53 @@
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class StudentController {
+    Student student;
+    StudentView studentView;
+    ArrayList<Course> registeredCourses; 
+    ArrayList<Course> courseList;
 
-    public void registerCourse(ArrayList<Course>courseList, ArrayList<Course>registeredCourseList, ArrayList<Student>enrollStudents){
-        StudentView studentView= new StudentView();
+    public StudentController(ArrayList<Course>courses){
+        this.courseList = courses;
+        registeredCourses = new ArrayList<Course>();
+        this.student = new Student();
+        this.studentView = new StudentView();
+    }
 
-        // display available course list
-        studentView.displayCourseDetails(courseList);
-
-        //display enter course view
-        String code= studentView.enterCourseView();
-
-        //find course and return the course object
-        Course course= findCourseByCode(code, courseList);
-
-        if(course != null){
-            String name= studentView.enterNameView();
-            CourseController courseController= new CourseController();
-            ArrayList<Student>enrolledStudents= courseController.getEnrolledStudents();
-
-            // check the current enrolled student before adding to the list
-            if(enrolledStudents.size()>= course.getMaxStudent()){
-                System.out.println("Course is full. Cannot register.");
-            }else{
-                // add course to student bucket
-                registeredCourseList.add(course);
-
-                // add student to course bucket
-                Student student= new Student(name);
-                enrollStudents.add(student);
-                course.setCurrentRegistered(course.getCurrentRegistered() + 1);
-                System.out.println("Course registered successfully.");
-
-            }
-        }else{
-            System.out.println("Invalid course code");
+    public void ClearScreen() {
+        try {
+            if (System.getProperty("os.name").contains("Windows"))
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            else
+                Runtime.getRuntime();
+        } catch (IOException | InterruptedException ex) {
         }
+    }
+
+    public void studentAction(ArrayList<Student>students){
+        int action;
+        do {
+            action = studentView.StudentMenu(students);
+            ClearScreen();
+            switch (action) {
+                case 1: {
+                    // Register for course
+                    studentView.displayCourseDetails(courseList);
+                    registerCourse(courseList);
+                    break;
+                }
+                case 2: {
+                    // View registered courses
+                    studentView.displayRegisteredCourse(registeredCourses);
+                    break;
+                }
+                default: {
+                    System.out.println("Invalid option :(");
+                    break;
+                }
+            }
+
+        } while (action > 0 && action < 3);
     }
 
     private Course findCourseByCode(String code,ArrayList<Course>courseList) {
@@ -50,4 +62,38 @@ public class StudentController {
     }
 
     
+    public void registerCourse(ArrayList<Course>courseList){
+        student = studentView.getCurrentStudent();
+        if(courseList.size()!=0){
+        //display enter course view
+        String code= studentView.enterCourseView();
+
+        //find course and return the course object
+        Course course= findCourseByCode(code, courseList);
+
+        if(course != null){
+            Course courseControl= new Course();
+            ArrayList<Student>enrolledStudents= courseControl.getEnrolledStudents();
+
+            // check the current enrolled student before adding to the list
+            if(enrolledStudents.size()>= course.getMaxStudent()){
+                System.out.println("Course is full. Cannot register.");
+            }else{
+                // add course to student bucket
+                student.getEnrolledCourse().add(course);
+
+                // Add course to registeredCourses list
+                registeredCourses.add(course);
+
+                // add student to course bucket
+                // enrollStudents.add(studentView.getCurrentStudent());
+                course.setCurrentRegistered(course.getCurrentRegistered() + 1);
+                System.out.println("Course registered successfully.");
+
+            }
+        }else{
+            System.out.println("Invalid course code");
+        }
+        }
+    }
 }

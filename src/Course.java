@@ -7,41 +7,33 @@ public class Course {
     private int maxStudent;
     private int currentRegistered;
     private String coordinator;
-    
+    ArrayList<Student> enrolledStudent;
 
-    public Course(){};
+    public Course(){
+        this.enrolledStudent = new ArrayList<Student>();
+    }
 
-    public Course(String cc, String cn, String coordinator, int c, int max) {
-        this.courseCode = cc;
-        this.courseName = cn;
-        this.credit = c;
-        this.maxStudent = max;
-        this.coordinator = coordinator;
+    public Course(String courseCode, String courseName, int credit, int maxStudent,
+            String coordinator) {
+        this.courseCode = courseCode;
+        this.courseName = courseName;
+        this.credit = credit;
+        this.maxStudent = maxStudent;
         this.currentRegistered = 0;
+        this.coordinator = coordinator;
+        this.enrolledStudent = new ArrayList<Student>();
     }
-
-    public String getCourseName() {
-        return this.courseName;
-    }
-
-    public int getCredit() {
-        return credit;
-    }
-
-    public void setCurrentRegistered(int currentRegistered) {
-        this.currentRegistered = currentRegistered;
-    }
-
-    public void setCoordinator(String coordinator) {
-         this.coordinator = coordinator;
-     }
 
     public String getCourseCode() {
         return courseCode;
     }
 
-    public String getCoordinator() {
-        return coordinator;
+    public String getCourseName() {
+        return courseName;
+    }
+
+    public int getCredit() {
+        return credit;
     }
 
     public int getMaxStudent() {
@@ -52,26 +44,34 @@ public class Course {
         return currentRegistered;
     }
 
-    public void displayCourseDetails(ArrayList<Course>courseList){
-        if(courseList.size()==0){
-            System.out.println("No available course");
+    public String getCoordinator() {
+        return coordinator;
+    }
+
+    public void setCoordinator(String coordinator) {
+        this.coordinator = coordinator;
+    }
+
+   public ArrayList<Student> getEnrolledStudents(){
+      return enrolledStudent;
+   }
+
+   public void setCurrentRegistered(int currentRegistered) {
+        this.currentRegistered = currentRegistered;
+    }
+
+   public void displayStudentRegistered(ArrayList<Student>enrolledStudents){
+        if(enrolledStudents.size() == 0){
+            System.out.println("No student registered yet.");
         }else{
-            for (int i = 0; i < courseList.size(); i++) {
-            Course course = courseList.get(i);
-            System.out.println("Course [" + (i + 1) + "]");
-            System.out.println("Course Code: " + course.getCourseCode());
-            System.out.println("Course Name: " + course.getCourseName());
-            System.out.println("Course Credit(s): " + course.getCredit());
-            System.out.println("Course Coordinator: " + course.getCoordinator());
-            System.out.println("Course's maximum student: " + course.getMaxStudent());
-            System.out.println("Current enrolled student: " + course.getCurrentRegistered());
-            System.out.println();
+            for(int i= 0; i<enrolledStudents.size(); i++){
+                Student student= enrolledStudents.get(i);
+                System.out.println("Students registered");
+                student.getName();
+            }
         }
-        }
-        
     }
 
 
-    
 
 }
