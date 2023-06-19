@@ -8,7 +8,7 @@ public class AdminController {
     private ArrayList<Lecturer> lecturerList;
 
     public AdminController(ArrayList<Lecturer> lecturerList, ArrayList<Student> studentList,
-            ArrayList<Course> courseList) {
+        ArrayList<Course> courseList) {
         this.courseList = courseList;
         this.studentList = studentList;
         this.lecturerList = lecturerList;
@@ -46,16 +46,43 @@ public class AdminController {
             case 4: {
                 // view student
                 adminView.displayStudentDetails(studentList);
+                //add student
+                addStudent();
                 break;
             }
             case 5:{
                 //view lecturer
                 adminView.displayLecturerDetails(lecturerList);
+                //add lecturer
+                addLecturer();
+                break;
             }
             default: {
                 System.out.println("Invalid option :(");
                 break;
             }
+        }
+    }
+
+    public void addLecturer(){
+        int count = adminView.addCount();
+        if (count != 0){
+            for(int i = 0;i<count;i++){
+                Lecturer addLec = adminView.addLec();
+                lecturerList.add(addLec);
+            }
+            System.out.println("Added successfully!");
+        }
+    }
+
+    public void addStudent(){
+        int count = adminView.addCount();
+        if (count != 0){
+            for(int i = 0;i<count;i++){
+                Student addStud = adminView.addStud();
+                studentList.add(addStud);
+            }
+            System.out.println("Added successfully!");
         }
     }
 

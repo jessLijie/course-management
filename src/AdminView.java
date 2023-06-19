@@ -14,6 +14,7 @@ public class AdminView {
         System.out.println("1. Display course \n2. Add course \n3. Remove course \n4. View Student \n5. View Lecturer");
         System.out.print("Enter your action >> ");
         action = scanner.nextInt();
+        scanner.nextLine();
         return action;
     }
 
@@ -139,6 +140,37 @@ public class AdminView {
             }
 
         }
+    }
+
+    public int addCount(){
+        int action, count = 0;
+        System.out.print("Add lecturer/student to the system (1/YES)>> ");
+        action = scanner.nextInt();
+        scanner.nextLine();
+        if (action==1){
+            System.out.print("How many to add >> ");
+            count = scanner.nextInt();
+            scanner.nextLine();
+        }
+        return count;
+    }
+
+    public Lecturer addLec(){
+        System.out.print("Enter the name of lecturer >> ");
+        String lecName = scanner.nextLine();
+        System.out.print("Enter the lecturer ID >> ");
+        String lecID = scanner.nextLine();
+        Lecturer toAdd = new Lecturer(lecName, lecID);
+        return toAdd;
+    }
+
+    public Student addStud(){
+        System.out.print("Enter the name of student >> ");
+        String studName = scanner.nextLine();
+        System.out.print("Enter the student ID >> ");
+        String studID = scanner.nextLine();
+        Student toAdd = new Student(studName, studID);
+        return toAdd;
     }
 
 }
