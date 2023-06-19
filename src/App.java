@@ -68,6 +68,7 @@ public class App {
                 }
             }
         }while(role<4 && role >0);
+        System.out.println("Bye!");
         
     }
 }
